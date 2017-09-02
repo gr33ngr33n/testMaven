@@ -12,6 +12,8 @@
 	<input type="submit" value="Submit" />
 </form>
 
+<a href="index2.jsp">Index2.jsp</a>
+
 <%
 	String name = request.getParameter("name");
 	String password = request.getParameter("password");
