@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>AJAX01 - content is String/Text</title>
+
+<script>
+	var xmlhttp;
+	var xmlDoc;
+	var parser;
+	var srcDoc;
+	function findText(){
+		if(window.XMLHttpRequest){
+			xmlhttp = new XMLHttpRequest();
+		}else{
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+		xmlhttp.onreadystatechange = processText;
+		xmlhttp.open("GET","AJAX01Servlet?findTxt="+document.getElementById('findTxt').value,true);
+		xmlhttp.send();
+	}
+	
+	function processText(){
+		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+			srcDoc = xmlhttp.responseText;
+			parser = new DOMParser();
+			xmlDoc = parser.parseFromString(srcDoc,"text/xml");
+			var foundTxt = xmlDoc.getElementsByTagName("tutorial");
+			
+			var table = document.getElementById("contentTable");
+			table.innerHTML = "";
+			for(i=0; i<foundTxt.length; i++){
+				row = table.insertRow(i);
+				cell = row.insertCell(0);
+				cell.innerHTML = "<a href=''>"+foundTxt[i].childNodes[0].nodeValue+"</a>";
+			}
+		}
+	}
+	
+	
+	window.onscroll=function(){
+		var node_dummytext2 = document.getElementById("dummytext2");
+		var node_element = document.createElement("p");
+		var node_text = document.createTextNode("testing 123 123");
+		var node_img = document.createElement("IMG");
+		node_img.setAttribute("src","img/AuroraLogo-oriIcon.png");
+		node_element.appendChild(node_img);
+		
+		
+		if(document.documentElement.scrollTop + window.innerHeight >= document.documentElement.scrollHeight){
+			//document.getElementById("dummytext").innerHTML = document.documentElement.scrollTop + " -&&- " + document.documentElement.scrollHeight + " -&&- " + window.innerHeight;
+			//console.log(document.documentElement.scrollTop + " -&&- " + document.documentElement.scrollHeight + " -&&- " + window.innerHeight);
+			//findText();
+			//alert("bottom of page!!");
+			
+			//node_dummytext2.appendChild(node_element);
+			//node_dummytext2.appendChild(node_element.appendChild(node_text));
+			setTimeout(function(){node_dummytext2.appendChild(node_element);}, 2000);
+		}else if(document.body.scrollTop + window.innerHeight >= document.body.scrollHeight){
+			//alert("bottom of page!!");
+			//node_dummytext2.appendChild(node_element);
+			//node_dummytext2.appendChild(node_element.appendChild(node_text));
+			setTimeout(function(){node_dummytext2.appendChild(node_element);}, 2000);
+		}
+		
+	};
+</script>
+
+</head>
+<body>
+	
+	<input type="text" id="findTxt" />
+	<button type="button" onclick="findText()">Find</button>
+	<br/>
+	<table id="contentTable" style="border:1px solid black; width:145px" ></table>
+	
+	<div id="dummytext"></div>
+	
+	<div id="dummytext2">
+		<p>testing testing testing testing testing</p>
+		<p>testing testing testing testing testing</p>
+		<p>testing testing testing testing testing</p>
+		<p>testing testing testing testing testing</p>
+		<p>testing testing testing testing testing</p>
+		<p>testing testing testing testing testing</p>
+		<p>testing testing testing testing testing</p>
+		<p>testing testing testing testing testing</p>
+		<p>testing testing testing testing testing</p>
+		<p>testing testing testing testing testing</p>
+		<p>testing testing testing testing testing</p>
+	</div>
+	
+</body>
+</html>
