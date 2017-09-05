@@ -45,6 +45,7 @@ public class AJAX01Servlet extends HttpServlet {
 					"</topic>");
 		}
 		
+		System.out.println(getServletContext().getRealPath(""));
 	}
 
 	/**
