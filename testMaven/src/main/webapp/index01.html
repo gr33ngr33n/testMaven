@@ -17,7 +17,7 @@
 		}
 		
 		xmlhttp.onreadystatechange = processText;
-		xmlhttp.open("GET","/app/target/tomcat.28681/java/com/ajaxprac01/AJAX01Servlet?findTxt="+document.getElementById('findTxt').value,true);
+		xmlhttp.open("GET","AJAX01Servlet?findTxt="+document.getElementById('findTxt').value,true);
 		xmlhttp.send();
 	}
 	
