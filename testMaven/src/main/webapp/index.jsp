@@ -23,6 +23,8 @@
 	}else{
 		out.println("Username is NULL");
 	}
+	
+	out.println(getServletContext().getRealPath("/"));
 %>
 
 </body>
